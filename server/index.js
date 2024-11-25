@@ -1,28 +1,27 @@
-const config = require('./config.json');
-const mongoose = require('mongoose');
-const bcryptjs = require('bcryptjs');
-const express = require('express');
-const cors = require('cors');
-const jws = require('jsonwebtoken');
-
-const User = require('./models/user.model');
+require("dotenv").config();
+const config = require("./config.json");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const router = require("./users/routes/usersRestController");
 
 mongoose.connect(config.connectionString);
 
+const express = require("express");
 const app = express();
-app.use(express.json());
-app.use(cors({origin:"*"}));
+
+// Apply middleware in the correct order
+app.use(express.json()); // Body parser middleware must come first
+app.use(cors({ origin: "*" })); // CORS middleware
+
+app.use(router); // Routes come after middleware
 
 const PORT = process.env.PORT || 8080;
 
-//create account
-app.get("/create-account", async(req, res) => {
-}
-);
-
 app.listen(PORT, () => {
-    console.log("app is listening to port " + PORT);
-}
-);
+  console.log("app is listening to port " + PORT);
+});
 
 module.exports = app;
+
+
+

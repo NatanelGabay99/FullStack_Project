@@ -1,0 +1,15 @@
+const mongoose = require('mongoose');
+const Schmea = mongoose.Schema;
+
+const travelStorySchema = new Schmea({
+    title: {type: String, required: true},
+    story:{type: String, required: true},
+    visitedLocaton: {type: [String], default: []},
+    isFavourite: {type: Boolean, default: false},
+    userId: {type: Schmea.Types.ObjectId, ref: 'User', required: true},
+    createdOn: {type: Date, default: Date.now},
+    imageUrl: {type: String, required: true},
+    visitedDate: {type: Data, required: true},
+});
+
+module.exports = mongoose.model('TravelStory', travelStorySchema);
