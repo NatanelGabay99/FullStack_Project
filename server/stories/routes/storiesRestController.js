@@ -3,7 +3,9 @@ const express = require("express");
 const router = express.Router();
 const TravelStory = require("../models/travelStory.model");
 const upload = require("../../multer/multer");
-
+const fs = require("fs");
+const path = require("path");
+const { error } = require("console");
 // Add travel story
 router.post("/add-travel-story", authenticateToken, async (req, res) => {
   const { title, story, visitedLocation, imageUrl, visitedDate } = req.body;
@@ -57,7 +59,18 @@ router.get("/get-all-stories", authenticateToken, async (req, res) => {
 
 
 //Route to handle image upload
-router.post('/upload-image', upload.single('image'), async (req, res) => {});
+router.post('/upload-image', upload.single('image'), async (req, res) => {
+  try{
+    if(!req.file){
+      return res.status(400).json({error: true, message: 'No image uploaded'});
+    }
+
+    const imageUrl = `http://localhost:8080/uploads/${req.file.filename}`;
+    res.status(201).json({imageUrl});
+  }catch(error){
+    res.status(500).json({error: true, message: error.message}); 
+  }
+});
 
 
 
