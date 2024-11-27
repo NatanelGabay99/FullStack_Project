@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const User = require("../../models/user.model");
+const User = require("../models/user.model");
 const authenticateToken = require("../../utilities");
 
 
@@ -102,13 +102,20 @@ router.post("/login", async (req, res) => {
 
 
 // Get user
-router.get('/get-user', authenticateToken,  async(req, res)=>{
-    const {userId} = req.user;
-    const user = await User.findOne({_id:userId});
-    if(!user){
-        return res.status(401).json({error:true, message:"User not found"});
+router.get("/get-user", authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: true, message: "User not found" });
     }
 
-})
+    return res.json({ error: false, user });
+  } catch (err) {
+    console.error("Error in /get-user:", err);
+    return res.status(500).json({ error: true, message: "Server error" });
+  }
+});
 
 module.exports = router;

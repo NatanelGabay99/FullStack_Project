@@ -5,7 +5,6 @@ const authenticateToken = (req, res, next) => {
     // Extract the token from the Authorization header
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
-
     // Check if the token is missing
     if (!token) {
       return res.status(401); // Unauthorized
