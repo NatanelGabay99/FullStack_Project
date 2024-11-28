@@ -59,7 +59,7 @@ router.get("/get-all-stories", authenticateToken, async (req, res) => {
 
 
 //Route to handle image upload
-router.post('/upload-image', upload.single('image'), async (req, res) => {
+router.post('/image-upload', upload.single('image'), async (req, res) => {
   try{
     if(!req.file){
       return res.status(400).json({error: true, message: 'No image uploaded'});
