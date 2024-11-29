@@ -5,7 +5,9 @@ const TravelStory = require("../models/travelStory.model");
 const upload = require("../../multer/multer");
 const fs = require("fs");
 const path = require("path");
-const { error } = require("console");
+
+
+
 // Add travel story
 router.post("/add-travel-story", authenticateToken, async (req, res) => {
   const { title, story, visitedLocation, imageUrl, visitedDate } = req.body;
@@ -71,6 +73,110 @@ router.post('/image-upload', upload.single('image'), async (req, res) => {
     res.status(500).json({error: true, message: error.message}); 
   }
 });
+
+// Delete an image from the uploads folder
+router.delete('/delete-image', async(req, res)=>{
+  const {imageUrl} = req.query;
+    if(!imageUrl){
+      return res.status(400).json({error: true, message: 'ImageURL parameter is required'});
+    }
+    try{
+  // extract the filename from the imageUrl
+  const filename = path.basename(imageUrl);
+  
+  // define the file path
+  const filePath = path.join(__dirname, '../../uploads', filename);
+
+  // check if the file exists
+  if(fs.existsSync(filePath)){
+
+  // delete the file from the uploads folder
+    fs.unlinkSync(filePath);
+    res.status(201).json({message: 'Image deleted successfully'});
+  } else{
+    res.status(401).json({error: true, message: 'Image not found'});
+  }
+} catch(error){
+  res.status(500).json({error: true, message: error.message});
+}
+});
+
+// Edit travel story
+router.post("/edit-story/:id", authenticateToken, async (req, res) => {
+  const {id} = req.params;
+  const { title, story, visitedLocation, imageUrl, visitedDate } = req.body;
+  const { userId } = req.user;
+
+// validate required fiels
+  if(!title || !story || !visitedLocation || !imageUrl || !visitedDate){
+    return res.status(400).json({error: true, message: 'All fields are required'});
+  }
+  
+  // convert visitedDate from milliseconds to a date objecDate object
+  const parsedVisitedDate = new Date(parseInt(visitedDate));
+
+  try{
+    // find the travel story by ID and ensure it belonhs to the authenticated user
+    const travelStory = await TravelStory.findOne({_id: id, userId: userId});
+
+    if(!travelStory){
+      return res.status(404).json({error: true, message: 'Travel story not found'});
+    }
+
+    const placeholderImageUrl = 'http://localhost:8080/assets/placeholder.png';
+
+    travelStory.title = title;
+    travelStory.story = story;
+    travelStory.visitedLocation = visitedLocation;
+    travelStory.imageUrl = imageUrl || placeholderImageUrl;
+    travelStory.visitedDate = parsedVisitedDate;
+    
+    await travelStory.save();
+    res.status(201).json({story: travelStory, message: 'Travel story updated successfully'});
+  } catch(error){
+    res.status(500).json({error: true, message: error.message});
+  }
+});
+
+
+// Delete a travel story
+router.delete('/delete-story/:id', authenticateToken, async(req, res)=>{
+  const {id} = req.params;
+  const {userId} = req.user;
+
+  try{
+    // find the travel story by ID and ensure it belonhs to the authenticated user
+    const travelStory = await TravelStory.findOne({_id: id, userId: userId});
+
+    if(!travelStory){
+      return res.status(404).json({error: true, message: 'Travel story not found'});
+    }
+    
+    // delete the travel story from the database
+    await travelStory.deleteOne({_id: id, userId: userId});
+    
+    // extract the filename from the imageUrl
+    const imageUrl = travelStory.imageUrl;
+    const filename = path.basename(imageUrl);
+    
+    // define the file path
+    const filePath = path.join(__dirname, '../../uploads', filename);
+
+    // delete the image fuile from the uploads folder
+    fs.unlink(filePath, (error)=>{
+      if(error){
+        console.log('Failed to delete image file:', error);
+      }
+      });
+    
+      res.status(201).json({message: 'Traval story deleted successfully'});
+    } catch (error){
+      res.status(500).json({error: true, message: error.message});
+    }
+  });
+
+    
+
 
 
 
