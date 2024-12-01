@@ -5,12 +5,12 @@ const cors = require("cors");
 const path = require("path");
 const express = require("express");
 
-const router = require("./users/routes/usersRestController");
-const storiesRouter = require("./stories/routes/storiesRestController");
 
 mongoose.connect(config.connectionString);
 
 const app = express();
+const usersRouter = require("./users/routes/usersRestController");
+const storiesRouter = require("./stories/routes/storiesRestController");
 
 // Apply middleware
 app.use(express.json()); // Body parser middleware
@@ -21,8 +21,8 @@ app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 app.use('/assets', express.static(path.join(__dirname, '/assets')));
 
 // Use routes
+app.use(usersRouter);
 app.use(storiesRouter);
-app.use(router);
 
 const PORT = process.env.PORT || 8080;
 

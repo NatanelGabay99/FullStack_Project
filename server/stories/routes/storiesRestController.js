@@ -1,5 +1,6 @@
 const authenticateToken = require("../../utilities");
 const express = require("express");
+
 const router = express.Router();
 const TravelStory = require("../models/travelStory.model");
 const upload = require("../../multer/multer");
@@ -175,10 +176,28 @@ router.delete('/delete-story/:id', authenticateToken, async(req, res)=>{
     }
   });
 
+
+// mark Favorite travel story
+router.put('/favorite-story/:id', authenticateToken,  async (req, res) => { 
+  const { id } = req.params;
+  const { isFavorite } = req.body; // Destructure the boolean value
+  const { userId } = req.user;
+
+  try {
+    const travelStory = await TravelStory.findOne({ _id: id, userId: userId });
+    if (!travelStory) {
+      return res.status(404).json({ error: true, message: 'Travel story not found' });
+    }
+
+    travelStory.isFavorite = isFavorite;
     
+    await travelStory.save();
+    res.status(201).json({ message: 'Travel story updated successfully' });
+  } catch (error) {
+    res.status(500).json({ error: true, message: error.message });
+  }
+});
 
 
 
-
-  
 module.exports = router;

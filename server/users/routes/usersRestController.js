@@ -48,7 +48,6 @@ router.post("/create-account", async (req, res) => {
 });
 
 
-
 // Login
 router.post("/login", async (req, res) => {
   try {
@@ -117,5 +116,6 @@ router.get("/get-user", authenticateToken, async (req, res) => {
     return res.status(500).json({ error: true, message: "Server error" });
   }
 });
+
 
 module.exports = router;

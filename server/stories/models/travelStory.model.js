@@ -5,7 +5,7 @@ const travelStorySchema = new Schmea({
     title: {type: String, required: true},
     story:{type: String, required: true},
     visitedLocation: {type: [String], default: []},
-    isFavourite: {type: Boolean, default: false},
+    isFavorite: {type: Boolean, default: false},
     userId: {type: Schmea.Types.ObjectId, ref: 'User', required: true},
     createdOn: {type: Date, default: Date.now},
     imageUrl: {type: String, required: true},
