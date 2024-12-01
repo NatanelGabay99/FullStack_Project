@@ -190,12 +190,61 @@ router.put('/favorite-story/:id', authenticateToken,  async (req, res) => {
     }
 
     travelStory.isFavorite = isFavorite;
-    
+
     await travelStory.save();
     res.status(201).json({ message: 'Travel story updated successfully' });
   } catch (error) {
     res.status(500).json({ error: true, message: error.message });
   }
+});
+
+// search travel stories
+router.get('/search', authenticateToken, async(req, res)=>{
+  const {query} =req.query;
+  const {userId} = req.user;
+
+  if(!query){
+    return res.status(404).json({error: true, messaage: 'query  is required'});
+  }
+
+  try{
+    const searchResults = await TravelStory.find({
+      userId: userId,
+      $or: [
+        {title: {$regex: query, $options: 'i'}},
+        {story: {$regex: query, $options: 'i'}},
+        {visitedLocation: {$regex: query, $options: 'i'}},
+      ],
+    }).sort({isFavorite: -1});
+
+    res.status(200).json({stories: searchResults});
+  } catch(error){
+     res.status(500).json({error: true, message: error.message});
+  }
+});
+
+// filter travel story
+router.get('/filter-stories', authenticateToken, async(req, res)=>{
+  const {startDate, endDate} = req.query;
+  const {userId} = req.user;
+ 
+  try{
+    // convert startDate and endDate from milliseconds to date objects
+    const start = new Date(parseInt(startDate));
+    const end = new Date(parseInt(endDate));
+
+    // find travel stories that belong to the authenticated user and fall within the date range
+    const filteredStories = await TravelStory.find({
+      userId: userId,
+      visitedDate: {$gte: start, $lte: end},
+    }).sort({isFavorite: -1});
+
+    res.status(200).json({stories: filteredStories});
+
+
+  } catch(error){
+    res.status(500).json({error: true, message: error.message});
+}
 });
 
 
