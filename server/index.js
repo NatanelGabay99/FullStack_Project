@@ -1,9 +1,9 @@
 require("dotenv").config();
 const config = require("./config.json");
 const mongoose = require("mongoose");
-const cors = require("cors");
 const path = require("path");
 const express = require("express");
+
 
 
 mongoose.connect(config.connectionString);
@@ -11,10 +11,11 @@ mongoose.connect(config.connectionString);
 const app = express();
 const usersRouter = require("./users/routes/usersRestController");
 const storiesRouter = require("./stories/routes/storiesRestController");
+const corsMiddleware = require("./middlewares/cors");
 
 // Apply middleware
 app.use(express.json()); // Body parser middleware
-app.use(cors({ origin: "*" })); // CORS middleware
+app.use(corsMiddleware); // CORS middleware
 
 // Serve static files from the uploads and assets directory
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
