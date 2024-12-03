@@ -1,7 +1,8 @@
-import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Home from './pages/Home/Home';
 import SignUp from './pages/Auth/Signup';
 import Login from './pages/Auth/Login';
+import Root from './routes/Root';
 
 
 const App = () => {
@@ -9,6 +10,7 @@ const App = () => {
     <div>
       <Router>
         <Routes>
+          <Route path="/" element={<Root />} />
           <Route path="/dashboard" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
@@ -18,4 +20,4 @@ const App = () => {
   )
 }
 
-export default App
+export default App;

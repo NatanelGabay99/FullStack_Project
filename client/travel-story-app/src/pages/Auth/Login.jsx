@@ -22,7 +22,7 @@ const Login = () => {
 
   setError('');
 
-  // Login call API
+  // Login API call
   try{
     const response  = await axiosInstance.post('/login',{ email: email, password: password});
 
@@ -50,7 +50,7 @@ const Login = () => {
         <div className="w-2/4 h-[90vh] flex items-end bg-login-bg-img bg-cover bg-center rounded-lg p-10 z-50">
           <div>
             <h4 className="text-5xl text-white font-semibold leading-[58px]">
-              Capture Your <br /> Journeys
+              Capture Your <br /> Trips
             </h4>
             <p className="text-[20px] text-white leading-6 pr-7 mt-4">
               Record your travel experiences and memories in your personal

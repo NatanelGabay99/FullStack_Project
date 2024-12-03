@@ -16,7 +16,7 @@ router.post("/create-account", async (req, res) => {
     
     const isUser = await User.findOne({ email });
     if (isUser) {
-      return res.status(400).json({ error: true, message: "User already exists" });
+      return res.status(400).json({ error: true, message: "It seems you already have an acoount. Please Login" });
     }
 
     const hashedPassword = await bcryptjs.hash(password, 10);
