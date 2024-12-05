@@ -14,8 +14,8 @@ const storiesRouter = require("./stories/routes/storiesRestController");
 const corsMiddleware = require("./middlewares/cors");
 
 // Apply middleware
-app.use(express.json()); // Body parser middleware
 app.use(corsMiddleware); // CORS middleware
+app.use(express.json()); // Body parser middleware
 
 // Serve static files from the uploads and assets directory
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));

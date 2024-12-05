@@ -1,7 +1,9 @@
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const authenticateToken = (req, res, next) => {
   try {
+    
     // Extract the token from the Authorization header
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1]; 
@@ -9,10 +11,11 @@ const authenticateToken = (req, res, next) => {
     if (!token) {
       return res.status(401); // Unauthorized
     }
-
+    
     // Verify the token
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
       if (err) {
+        console.error("Error in authenticateToken middleware:", err);
         return res.status(403); // Forbidden
       }
 
@@ -21,7 +24,6 @@ const authenticateToken = (req, res, next) => {
       next();
     });
   } catch (err) {
-    console.error("Error in authenticateToken middleware:", err);
     return res.status(500); // Internal Server Error
   }
 };

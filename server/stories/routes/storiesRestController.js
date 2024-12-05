@@ -123,9 +123,9 @@ router.post("/edit-story/:id", authenticateToken, async (req, res) => {
     if(!travelStory){
       return res.status(404).json({error: true, message: 'Travel story not found'});
     }
-
+    
     const placeholderImageUrl = 'http://localhost:8080/assets/placeholder.png';
-
+    
     travelStory.title = title;
     travelStory.story = story;
     travelStory.visitedLocation = visitedLocation;

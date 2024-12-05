@@ -109,13 +109,15 @@ router.get("/get-user", authenticateToken, async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: true, message: "User not found" });
     }
-
     return res.json({ error: false, user });
   } catch (err) {
     console.error("Error in /get-user:", err);
     return res.status(500).json({ error: true, message: "Server error" });
   }
 });
+
+
+
 
 
 module.exports = router;
