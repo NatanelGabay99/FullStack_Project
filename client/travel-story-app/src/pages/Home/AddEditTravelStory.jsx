@@ -2,6 +2,7 @@ import { MdAdd, MdClose, MdUpdate, MdDeleteOutline } from "react-icons/md";
 import PropTypes from "prop-types";
 import DateSelector from "../../components/Input/DateSelector";
 import { useState } from "react";
+import ImageSelector from "../../components/Input/ImageSelector";
 
 const AddEditTravelStory = ({
   storyInfo,
@@ -16,6 +17,9 @@ const AddEditTravelStory = ({
   const [visitedDate, setVisitedDate] = useState(null);
 
   const handleAddOrUpdateClick = () => {};
+
+  // delete story image and update the story
+  const handleDeleteStoryImg = async () => {};
 
   return (
     <div>
@@ -64,19 +68,28 @@ const AddEditTravelStory = ({
             <DateSelector date={visitedDate} setDate={setVisitedDate} />
           </div>
 
-          <ImageSelector image={storyImg} setImage={setStoryImg} />
+          <ImageSelector
+            image={storyImg}
+            setImage={setStoryImg}
+            handleDeleteImg={handleDeleteStoryImg}
+          />
 
           <div className="flex flex-col gap-2 mt-4">
             <label className="input-label">Story</label>
             <textarea
               type="text"
               className="text-sm text-slate-950 outline-none bg-slate-50 p-2 rounded"
-              placeholder="Your story here..."
+              placeholder="Write your traveling story here..."
               rows={10}
               value={story}
               onChange={({ target }) => setStory(target.value)}
-            ></textarea>
+            />
           </div>
+
+            <div className="pt-3">
+                <label className="input-label">Visited Locations</label>
+                <TagInput tags={visitedLocation} setTags={setVisitedLocation}/>
+            </div>
         </div>
       </div>
     </div>
