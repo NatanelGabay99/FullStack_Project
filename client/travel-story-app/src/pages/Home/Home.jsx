@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
 import TravelStoryCard from "../../components/Cards/TravelStoryCard";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Home = () => {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState(null);
@@ -43,13 +46,33 @@ const Home = () => {
   };
 
   // handle Edit story
-  const handleEdit = async () => {};
+  const handleEdit = () => {};
 
   // handle travel story click
-  const handleViewStory = async () => {};
+  const handleViewStory = () => {};
 
   // handle update favorite
-  const updateIsFavorite = () => {};
+  const updateIsFavorite = async (storyData) => {
+    const storyId = storyData._id;
+    try {
+      const response = await axiosInstance.put(
+        "/favorite-story/" + storyId,
+        {
+          isFavorite: !storyData.isFavorite,
+        }
+      );
+      if (response.data && response.data.travelStory) {
+        if (response.data.travelStory.isFavorite) {
+          toast.success("This story has been liked");
+        } else {
+          toast.error("This story has been unliked");
+        }
+      }
+      getAllTravelStories(); // Refresh the travel stories
+    } catch (error) {
+      console.error("An Unexpected Error Occurred. Please try again.", error);
+    }
+  };
 
   useEffect(() => {
     getAllTravelStories();
@@ -68,18 +91,20 @@ const Home = () => {
             {allStories.length > 0 ? (
               <div className="grid grid-cols-3 gap-4">
                 {allStories.map((item) => {
-                  return <TravelStoryCard 
-                  key={item._id} 
-                  imgUrl={item.imageUrl}
-                  title={item.title}
-                  story={item.story}
-                  date={item.visitedDate}
-                  visitedLocation={item.visitedLocation}
-                  isFavorite={item.isFavorite}
-                  onEdit={() => handleEdit(item)}
-                  onClick={() => handleViewStory(item)}
-                  onFavoriteClick={() => updateIsFavorite(item)}
-                  />;
+                  return (
+                    <TravelStoryCard
+                      key={item._id}
+                      imgUrl={item.imageUrl}
+                      title={item.title}
+                      story={item.story}
+                      date={item.visitedDate}
+                      visitedLocation={item.visitedLocation}
+                      isFavorite={item.isFavorite}
+                      onEdit={() => handleEdit(item)}
+                      onClick={() => handleViewStory(item)}
+                      onFavoriteClick={() => updateIsFavorite(item)}
+                    />
+                  );
                 })}
               </div>
             ) : (
@@ -89,6 +114,8 @@ const Home = () => {
           <div className="w-[320px]"></div>
         </div>
       </div>
+
+      <ToastContainer />
     </>
   );
 };

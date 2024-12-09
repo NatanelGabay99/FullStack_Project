@@ -192,7 +192,7 @@ router.put('/favorite-story/:id', authenticateToken,  async (req, res) => {
     travelStory.isFavorite = isFavorite;
 
     await travelStory.save();
-    res.status(201).json({ message: 'Travel story updated successfully' });
+    res.status(201).json({ travelStory, message: 'Travel story updated successfully' });
   } catch (error) {
     res.status(500).json({ error: true, message: error.message });
   }
