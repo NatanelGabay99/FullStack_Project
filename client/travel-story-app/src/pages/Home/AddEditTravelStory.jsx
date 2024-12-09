@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import DateSelector from "../../components/Input/DateSelector";
 import { useState } from "react";
 import ImageSelector from "../../components/Input/ImageSelector";
+import TagInput from "../../components/Input/TagInput";
 
 const AddEditTravelStory = ({
   storyInfo,
