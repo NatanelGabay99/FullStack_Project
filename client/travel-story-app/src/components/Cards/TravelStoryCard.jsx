@@ -12,7 +12,6 @@ const TravelStoryCard = ({
   date,
   visitedLocation,
   isFavorite,
-  onEdit,
   onClick,
   onFavoriteClick,
 }) => {
@@ -62,7 +61,6 @@ TravelStoryCard.propTypes = {
   date: PropTypes.string,
   visitedLocation: PropTypes.string,
   isFavorite: PropTypes.bool,
-  onEdit: PropTypes.func,
   onClick: PropTypes.func,
   onFavoriteClick: PropTypes.func,
 };

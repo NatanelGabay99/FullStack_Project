@@ -8,6 +8,7 @@ import TravelStoryCard from "../../components/Cards/TravelStoryCard";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AddEditTravelStory from "./AddEditTravelStory";
+import ViewTravelStory from "./ViewTravelStory";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -16,6 +17,8 @@ const Home = () => {
   const [allStories, setAllStories] = useState([]);
 
   const [openAddEditModal, setOpenAddEditModal] = useState({isShown: false, type: "add", data: null});
+
+  const [openViewModal, setOpenViewModal] = useState({isShown: false, data: null});
 
   const getUserInfo = async () => {
     try {
@@ -51,10 +54,12 @@ const Home = () => {
   };
 
   // handle Edit story
-  const handleEdit = () => {};
+  const handleEdit = (data) => {};
 
   // handle travel story click
-  const handleViewStory = () => {};
+  const handleViewStory = (data) => {
+    setOpenViewModal({isShown: true, data});
+  };
 
   // handle update favorite
   const updateIsFavorite = async (storyData) => {
@@ -105,7 +110,7 @@ const Home = () => {
                       date={item.visitedDate}
                       visitedLocation={item.visitedLocation}
                       isFavorite={item.isFavorite}
-                      onEdit={() => handleEdit(item)}
+                      /* onEdit={() => handleEdit(item)} */
                       onClick={() => handleViewStory(item)}
                       onFavoriteClick={() => updateIsFavorite(item)}
                     />
@@ -142,7 +147,32 @@ const Home = () => {
       getAllTravelStories={getAllTravelStories}
       />
       </Modal>
-     
+
+
+      
+      {/* View travel story Model */}
+      <Modal
+      isOpen={openViewModal.isShown}
+      onRequestClose={()=> {}}
+      style={{
+        overlay:{
+          backgroundColor: 'rgba(0,0,0,0.2)',
+          zIndex: 999,
+        }
+      }}
+      appElement={document.getElementById('root')}
+      className="model-box"
+      >
+        <ViewTravelStory
+        storyInfo={openViewModal.data || null} 
+        onClose={()=> {}}
+        onEditClick={()=> {}}
+        onDeleteClick={()=> {}}
+        />
+      </Modal>
+
+
+
 
 
       <button className="w-16 h-16 flex items-center justify-center 
