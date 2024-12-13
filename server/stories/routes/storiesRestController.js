@@ -69,7 +69,7 @@ router.post('/image-upload', upload.single('image'), async (req, res) => {
     }
 
     const imageUrl = `http://localhost:8080/uploads/${req.file.filename}`;
-    res.status(201).json({imageUrl});
+    res.status(200).json({imageUrl});
   }catch(error){
     res.status(500).json({error: true, message: error.message}); 
   }
@@ -103,13 +103,13 @@ router.delete('/delete-image', async(req, res)=>{
 });
 
 // Edit travel story
-router.post("/edit-story/:id", authenticateToken, async (req, res) => {
+router.put("/edit-story/:id", authenticateToken, async (req, res) => {
   const {id} = req.params;
   const { title, story, visitedLocation, imageUrl, visitedDate } = req.body;
   const { userId } = req.user;
 
 // validate required fiels
-  if(!title || !story || !visitedLocation || !imageUrl || !visitedDate){
+  if(!title || !story || !visitedLocation || !visitedDate){
     return res.status(400).json({error: true, message: 'All fields are required'});
   }
   
@@ -133,7 +133,7 @@ router.post("/edit-story/:id", authenticateToken, async (req, res) => {
     travelStory.visitedDate = parsedVisitedDate;
     
     await travelStory.save();
-    res.status(201).json({story: travelStory, message: 'Travel story updated successfully'});
+    res.status(201).json({ travelStory, message: 'Travel story updated successfully'});
   } catch(error){
     res.status(500).json({error: true, message: error.message});
   }
