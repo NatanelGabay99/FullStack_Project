@@ -11,10 +11,10 @@ import AddEditTravelStory from "./AddEditTravelStory";
 import ViewTravelStory from "./ViewTravelStory";
 import EmptyCard from "../../components/Cards/EmptyCard";
 
-import EmptyImg from "../../assets/images/add-story.svg";
 import { DayPicker } from "react-day-picker";
 import moment from "moment";
 import FilterInfoTitle from "../../components/Cards/FilterInfoTitle";
+import { getEmptyCardImg, getEmptyCardMessage } from "../../utils/helper";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -229,9 +229,8 @@ const Home = () => {
               </div>
             ) : (
               <EmptyCard
-                imgSrc={EmptyImg}
-                message={`Start creating your first Travel Story! Click the Add(+) button at the bottom of the page to journal
-              down your experience amd memeorable moments. Lets get started!`}
+                imgSrc={getEmptyCardImg(filterType)}
+                message={getEmptyCardMessage(filterType)}
               />
             )}
           </div>
