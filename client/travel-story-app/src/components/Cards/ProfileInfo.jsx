@@ -16,7 +16,6 @@ const ProfileInfo = ({userInfo, onLogout}) => {
                 Logout
             </button>
         </div>
-
     </div>)
   )
 }

@@ -46,12 +46,25 @@ router.post("/add-travel-story", authenticateToken, async (req, res) => {
 });
 
 // Get all travel stories
-router.get("/get-all-stories", authenticateToken, async (req, res) => {
-  const { userId } = req.user;
+router.get("/get-all-stories", async (req, res) => {
 
   try {
     // Find all travel stories for the authenticated user
-    const travelStories = await TravelStory.find({ userId: userId }).sort({isFavorite: -1});
+    const travelStories = await TravelStory.find().sort({isFavorite: -1});
+    // Respond with the travel stories
+    res.status(200).json({ stories: travelStories });
+  } catch (error) {
+    console.error("Error in /travel-stories:", error);
+    res.status(500).json({ error: true, message: error.message });
+  }
+});
+
+router.get("/get-my-stories", authenticateToken,  async (req, res) => {
+ const {userId} = req.user;
+
+  try {
+    // Find all travel stories for the authenticated user
+    const travelStories = await TravelStory.find({userId}).sort({isFavorite: -1});
     // Respond with the travel stories
     res.status(200).json({ stories: travelStories });
   } catch (error) {

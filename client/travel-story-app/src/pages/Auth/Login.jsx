@@ -1,45 +1,57 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PasswordInput from "../../components/Input/PasswordInput";
 import { validateEmail } from "../../utils/helper";
-import axiosInstance from '../../utils/axiosInstance';
+import axiosInstance from "../../utils/axiosInstance";
+
 const Login = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
-  const handleLogin = async(e) => {
-  e.preventDefault();
-  if(!validateEmail(email)){
-    setError("Please enter a valid email address");
-    return;
-  }
-  if(!password){
-    setError("Please enter password");
-    return;
-  }
-
-  setError('');
-
-  // Login API call
-  try{
-    const response  = await axiosInstance.post('/login',{ email: email, password: password});
-
-    // handle successful login response
-    if(response.data && response.data.accessToken){
-      localStorage.setItem('accessToken', response.data.accessToken);
-      navigate('/dashboard');
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address");
+      return;
     }
-  } catch(error) {
-  // handle login error
-  if(error.response && error.response.data && error.response.data.message){
-    setError(error.response.data.message);
-  } else{
-    setError('An unexpected error occured. Please try again later');
-  }
-}
-};
+    if (!password) {
+      setError("Please enter password");
+      return;
+    }
+    if (!email && !password) {
+      setError("Please enter your email and password");
+      return;
+    }
+
+    setError("");
+
+    // Login API call
+    try {
+      const response = await axiosInstance.post("/login", {
+        email: email,
+        password: password,
+      });
+
+      // handle successful login response
+      if (response.data && response.data.accessToken) {
+        localStorage.setItem("accessToken", response.data.accessToken);
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      // handle login error
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setError(error.response.data.message);
+      } else {
+        setError("An unexpected error occured. Please try again later");
+      }
+    }
+  };
 
   return (
     <div className="h-screen bg-cyan-50 overflow-hidden relative">
@@ -63,14 +75,17 @@ const Login = () => {
           <form onSubmit={handleLogin}>
             <h4 className="text-2xl font-semibold mb-7">Login</h4>
 
-            <input type="text" placeholder="Email" className="input-box" 
-             value={email}
-             onChange={({target})=> setEmail(target.value)}
+            <input
+              type="text"
+              placeholder="Email"
+              className="input-box"
+              value={email}
+              onChange={({ target }) => setEmail(target.value)}
             />
 
-            <PasswordInput 
-            value={password}
-            onChange={({target})=> setPassword(target.value)}
+            <PasswordInput
+              value={password}
+              onChange={({ target }) => setPassword(target.value)}
             />
 
             {error && <p className="text-red-500 text-xs pb-1">{error}</p>}
@@ -90,6 +105,11 @@ const Login = () => {
               Create Account
             </button>
           </form>
+          <div className="text-center mt-8">
+            <p className=" text-xs text-cyan-500 font-medium cursor-pointer" onClick={()=> navigate('/home')}>
+              Return to Home page
+            </p>
+          </div>
         </div>
       </div>
     </div>

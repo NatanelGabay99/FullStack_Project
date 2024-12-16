@@ -113,6 +113,11 @@ const SignUp = () => {
               Login
             </button>
           </form>
+          <div className="text-center mt-8">
+            <p className=" text-xs text-cyan-500 font-medium cursor-pointer" onClick={()=> navigate('/home')}>
+              Return to Home page
+            </p>
+          </div>
         </div>
       </div>
     </div>

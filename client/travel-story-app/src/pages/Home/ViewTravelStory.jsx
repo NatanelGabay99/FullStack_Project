@@ -3,18 +3,26 @@ import { MdDeleteOutline, MdUpdate, MdClose } from "react-icons/md";
 import PropTypes from "prop-types";
 
 import { GrMapLocation } from "react-icons/gr";
+import { useLocation } from "react-router-dom";
 
 const ViewTravelStory = ({
   storyInfo,
   onClose,
   onEditClick,
   onDeleteClick,
-}) => {
+}
+) => {
+  const pageLocation = useLocation();
+
+
   return (
     <div className="relative">
       <div className="flex items-center justify-end">
         <div>
           <div className="flex items-center gap-3 bg-cyan-50/50 p-2 rounded-l-lg">
+
+          {localStorage.getItem("accessToken") && pageLocation.pathname === '/dashboard' &&(
+            <div className="flex gap-3">
             <button className="btn-small" onClick={onEditClick}>
               <MdUpdate className="text-lg" /> UPDATE STORY
             </button>
@@ -22,6 +30,8 @@ const ViewTravelStory = ({
             <button className="btn-small btn-delete" onClick={onDeleteClick}>
               <MdDeleteOutline className="text-lg" /> Delete
             </button>
+            </div>
+          )}
 
             <button className="" onClick={onClose}>
               <MdClose className="text-xl text-slate-400" />

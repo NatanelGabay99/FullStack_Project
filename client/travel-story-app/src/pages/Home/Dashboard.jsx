@@ -15,8 +15,9 @@ import { DayPicker } from "react-day-picker";
 import moment from "moment";
 import FilterInfoTitle from "../../components/Cards/FilterInfoTitle";
 import { getEmptyCardImg, getEmptyCardMessage } from "../../utils/helper";
+import Footer from "../../components/Footer";
 
-const Home = () => {
+const Dashboard = () => {
   const navigate = useNavigate();
 
   const [userInfo, setUserInfo] = useState(null);
@@ -43,8 +44,8 @@ const Home = () => {
     try {
       const accessToken = localStorage.getItem("accessToken");
       if (!accessToken) {
-        navigate("/login");
-      }
+      navigate("/home");}
+
       const response = await axiosInstance.get("/get-user");
       if (response.data && response.data.user) {
         // set user info if data exists
@@ -55,7 +56,7 @@ const Home = () => {
       if (error.response && error.response.status === 401) {
         // clear local storage if unauthorized
         localStorage.clear();
-        navigate("/login"); // redirect to login
+        navigate("/home");
       }
     }
   };
@@ -63,7 +64,7 @@ const Home = () => {
   // get all stories
   const getAllTravelStories = async () => {
     try {
-      const response = await axiosInstance.get("/get-all-stories");
+      const response = await axiosInstance.get("/get-my-stories");
       if (response.data && response.data.stories) {
         setAllStories(response.data.stories);
       }
@@ -199,6 +200,7 @@ const Home = () => {
         setSearchQuery={setSearchQuery}
         onSearchNote={onSeachStory}
         handleClearSearch={handleClearSearch}
+        displaySearch={true}
       />
 
       <div className="container mx-auto py-10">
@@ -317,8 +319,10 @@ const Home = () => {
       </button>
 
       <ToastContainer />
+
+      <Footer />
     </>
   );
 };
 
-export default Home;
+export default Dashboard;

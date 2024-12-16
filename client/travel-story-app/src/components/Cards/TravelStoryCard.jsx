@@ -23,12 +23,13 @@ const TravelStoryCard = ({
         className="w-full h-56 object-cover rounded-lg"
         onClick={onClick}
       />
-
+       {localStorage.getItem('accessToken') &&(
       <button className="w-12 h-12 flex items-center justify-center bg-white/40 rounded-lg border-[3px] border-white/30 absolute top-4 right-4" 
         onClick={onFavoriteClick}>
         <FaHeart className={`icon-btn ${isFavorite? 'text-red-500' : 'text-white'}`}
         />
       </button>
+      )}
 
       <div className="p-4" onClick={onClick}>
         <div className="flex items-center gap-3">
