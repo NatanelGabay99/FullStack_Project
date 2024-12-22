@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 import { GrMapLocation} from "react-icons/gr";
@@ -16,7 +15,7 @@ const TravelStoryCard = ({
   onFavoriteClick,
 }) => {
   return (
-    <div className="border rounded-lg overflow-hidden bg-white hover:shadow-lg hover:shadow-slate-200 transition-all ease-in-out relative cursor-pointer">
+    <div className=" border rounded-lg overflow-hidden bg-white hover:shadow-lg hover:shadow-slate-200 transition-all ease-in-out relative cursor-pointer">
       <img
         src={imgUrl}
         alt={title}

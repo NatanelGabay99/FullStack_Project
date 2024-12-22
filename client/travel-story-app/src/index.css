@@ -17,7 +17,7 @@
     font-family: 'Poppins', sans-serif;
   }
   body{
-    background-color: #fdfeff;
+    background-color: #F0F8FF;
     overflow-x: hidden;
   }
 }
@@ -82,6 +82,14 @@
   .btn-delete{
     @apply bg-rose-50 text-rose-500 shadow-rose-100/0 border border-rose-100 hover:bg-rose-500 
     hover:text-white
+  }
+
+  .slider-container{
+    @apply w-full bg-gray-200/100 py-14 px-10 rounded-lg;
+ 
+   .slick-slide > div {
+    margin: 0 10px;
+   }
   }
 
 

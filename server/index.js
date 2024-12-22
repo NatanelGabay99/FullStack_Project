@@ -1,17 +1,14 @@
 require("dotenv").config();
-const config = require("./config.json");
-const mongoose = require("mongoose");
 const path = require("path");
 const express = require("express");
 
 
 
-mongoose.connect(config.connectionString);
-
 const app = express();
 const usersRouter = require("./users/routes/usersRestController");
 const storiesRouter = require("./stories/routes/storiesRestController");
 const corsMiddleware = require("./middlewares/cors");
+const connectToDb = require("./DB/dbService");
 
 // Apply middleware
 app.use(corsMiddleware); // CORS middleware
@@ -27,8 +24,9 @@ app.use(storiesRouter);
 
 const PORT = process.env.PORT || 8080;
 
-app.listen(PORT, () => {
+app.listen (PORT, async () => {
   console.log("app is listening to port " + PORT);
+  await connectToDb();
 });
 
 module.exports = app;

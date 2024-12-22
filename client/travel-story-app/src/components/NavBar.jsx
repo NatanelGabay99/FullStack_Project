@@ -10,7 +10,6 @@ const NavBar = ({
   setSearchQuery,
   onSearchNote,
   handleClearSearch,
-  displaySearch = false,
 }) => {
   const isToken = localStorage.getItem("accessToken");
   const navigate = useNavigate();
@@ -33,22 +32,57 @@ const NavBar = ({
 
   return (
     <div className="bg-slate-100 flex items-center justify-between px-6 py-5 drop-shadow sticky top-0 z-10">
-      <img src={LOGO} alt="travel-story" className="h-9" />
-
-      {isToken && (
-        <>
-          {displaySearch && (
-            <SearchBar
-              value={searchQuery}
-              onChange={({ target }) => setSearchQuery(target.value)}
-              handleSearch={handleSearch}
-              onClearSearch={onClearSearch}
-            />
+      <div className="flex items-center gap-6">
+        <img src={LOGO} alt="travel-story" className="h-9" />
+        <div className="flex gap-4">
+          {!isToken && (
+            <>
+              <p
+                className="text-cyan-500 cursor-pointer font-semibold hover:transition hover:duration-300 ease-in-out hover:text-cyan-300/50"
+                style={{ fontFamily: "'Pacifico', cursive" }}
+                onClick={() => navigate("/home")}
+              >
+                Home
+              </p>
+              <p
+                className="text-cyan-500 cursor-pointer font-semibold hover:transition hover:duration-300 ease-in-out hover:text-cyan-300/50"
+                style={{ fontFamily: "'Pacifico', cursive" }}
+                onClick={() => navigate("/about")}
+              >
+                About
+              </p>
+            </>
           )}
-          <ProfileInfo userInfo={userInfo} onLogout={onLogout} /> {""}
-        </>
-      )}
 
+          {isToken && (
+            <>
+              <p
+                className="text-cyan-500 cursor-pointer font-semibold hover:transition hover:duration-300 ease-in-out hover:text-cyan-300/50"
+                style={{ fontFamily: "'Pacifico', cursive" }}
+                onClick={() => navigate("/dashboard")}
+              >
+                Dashboard
+              </p>
+              <p
+                className="text-cyan-500 cursor-pointer font-semibold hover:transition hover:duration-300 ease-in-out hover:text-cyan-300/50"
+                style={{ fontFamily: "'Pacifico', cursive" }}
+                onClick={() => navigate("/about")}
+              >
+                About
+              </p>
+            </>
+          )}
+        </div>
+      </div>
+      {isToken && (
+      <SearchBar
+        value={searchQuery}
+        onChange={({ target }) => setSearchQuery(target.value)}
+        handleSearch={handleSearch}
+        onClearSearch={onClearSearch}
+      />
+      )}
+      <ProfileInfo userInfo={userInfo} onLogout={onLogout} /> {""}
       {!userInfo && (
         <div className="flex items-center gap-3">
           <button
@@ -57,13 +91,13 @@ const NavBar = ({
           >
             Signup
           </button>
-        
-        <button
-          className="text-sm text-white btn-primary w-20"
-          onClick={() => navigate("/login")}
-        >
-          Login
-        </button>
+
+          <button
+            className="text-sm text-white btn-primary w-20"
+            onClick={() => navigate("/login")}
+          >
+            Login
+          </button>
         </div>
       )}
     </div>

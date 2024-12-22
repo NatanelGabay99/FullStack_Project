@@ -50,7 +50,7 @@ router.get("/get-all-stories", async (req, res) => {
 
   try {
     // Find all travel stories for the authenticated user
-    const travelStories = await TravelStory.find().sort({isFavorite: -1});
+    const travelStories = await TravelStory.find().sort({_id: 1}).limit(7).sort({isFavorite: -1});
     // Respond with the travel stories
     res.status(200).json({ stories: travelStories });
   } catch (error) {

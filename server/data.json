@@ -1,0 +1,73 @@
+{
+    "users" : [
+        {
+            "fullName": "Yisrael Yisraeli",
+            "email": "YisraelYis@gmail.com",
+            "password": "yis1234"
+        }
+    ], 
+
+    "stories" : [
+        {
+            "title" : "Weekend in London",
+            "story" : "Visiting London and seeing Big Ben was a memorable experience. The iconic clock tower, with its majestic design and historic significance, stands as a symbol of the city's timeless charm. Strolling along the River Thames and hearing the bell chimes created a sense of connection to London's rich past. The nearby attractions, like Westminster Abbey and the London Eye, added even more magic to the visit, making it an unforgettable journey.",
+            "visitedLocation": ["London"],
+            "userId" : "67445c6442936fcdec2536b5",
+            "imageUrl" : "http://localhost:8080/uploads/1733397922915.jpg",
+            "visitedDate" : "2024-12-08T13:58:44.706Z"
+        },
+
+        {
+            "title": "Niagra Falls",
+            "story": "Visiting Niagara Falls was breathtaking, with the roar of the falls and mist in the air creating an unforgettable atmosphere. The boat ride to the base brought me close to nature’s raw power, surrounded by rainbows and lush scenery. It was both tranquil and exhilarating.",
+            "visitedLocation": ["Canada"],
+            "userId": "67445c6442936fcdec2536b5",
+            "imageUrl": "http://localhost:8080/uploads/1733397851401.jpg",
+            "visitedDate": "2024-12-05T12:09:02.130Z"
+        },
+
+        {
+            "title": "Visiting the presidential white house ",
+            "story": "We visited the white house, met the president, and took a tour of the capital of the United States.",
+            "visitedLocation": [
+                "Washington.Dc"
+            ],
+            "userId": "67445c6442936fcdec2536b5",
+            "imageUrl": "http://localhost:8080/uploads/1733316932387.jpg",
+            "visitedDate": "2024-11-27T21:33:41.297Z"
+        },
+
+        {
+           "title": "At the Rice Plantation in Thailand",
+            "story": "Walking through Thailand's rice paddies was breathtaking—the endless green fields shimmered under the sun, with farmers skillfully planting shoots in the flooded soil. I joined them briefly, feeling the cool mud underfoot and gaining a deep appreciation for their craft. As the sun set, the fields mirrored the fiery orange sky, creating a peaceful and unforgettable scene.",
+            "visitedLocation": [
+                "Thailand"
+            ],
+            "userId": "67445c6442936fcdec2536b5",
+            "imageUrl": "http://localhost:8080/uploads/1733833808528.jpg",
+            "visitedDate": "2024-12-09T22:00:00.000Z"
+                },
+
+        {
+            "title": "San Francisco",
+            "story": "San Francisco was the best trip ever",
+            "visitedLocation": [
+                "san fransisco"
+            ],
+            "userId": "676407b8e824799ee62940d3",
+            "imageUrl": "http://localhost:8080/uploads/1734608973292.jpg",
+            "visitedDate": "2024-12-19T11:49:33.299Z"
+        },
+
+        {
+           "title": "Exploring the of China Wall",
+            "story": "China’s vast landscapes and rich history left me in awe. I started my journey in Beijing, walking the ancient halls of the Forbidden City and marveling at the Great Wall’s grandeur. In Xi’an, the Terracotta Army took me back to the Qin Dynasty, while in Chengdu, I found joy at the Panda Breeding Center. The serene beauty of Zhangjiajie’s Avatar Mountains became my favorite, with its towering peaks shrouded in mist—a sight I’ll never forget.",
+            "visitedLocation": [
+                "China"
+            ],
+            "userId": "67445c6442936fcdec2536b5",
+            "imageUrl": "http://localhost:8080/uploads/1734613432858.jpg",
+            "visitedDate": "2024-12-19T13:03:52.865Z"
+        }
+    ]
+}

@@ -317,9 +317,7 @@ const Dashboard = () => {
       >
         <MdAdd className="text-[32px] text-white" />
       </button>
-
       <ToastContainer />
-
       <Footer />
     </>
   );

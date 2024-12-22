@@ -41,7 +41,7 @@ const AboutPage = () => {
         />
 
 
-      <main className="max-w-5xl mx-[15%] mt-8 px-4">
+      <div className="max-w-5xl mx-[15%] mt-8 px-4">
         <section className="mb-8">
           <h1 className="text-5xl font-semibold text-cyan-500 mb-[3rem] mr-7">
             About the app
@@ -125,7 +125,7 @@ const AboutPage = () => {
             today to make every travel moment memorable!
           </p>
         </section>
-      </main>
+      </div>
 
       <Footer />
     </>

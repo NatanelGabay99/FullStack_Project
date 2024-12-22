@@ -8,6 +8,7 @@ export default {
     fontFamily:{
       display: ['Poppins', 'sans-serif'],
     },
+    
 
     extend: {
       // colors used the project
@@ -22,5 +23,5 @@ export default {
     },
   },
   plugins: [],
-}
+} 
 
