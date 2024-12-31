@@ -1,3 +1,4 @@
 {
+    "VALIDATOR": "joi",
     "ENVIRONMENT": "development"
-  }
+}

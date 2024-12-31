@@ -6,13 +6,18 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ViewTravelStory from "../pages/Home/ViewTravelStory";
 import Modal from "react-modal";
+import { useMediaQuery } from "react-responsive";
 
 const StorySlideShowCarousel = () => {
+
+  const isXS = useMediaQuery({ query: '(max-width: 576px)' });
+ 
   const settings = {
     dots: true,
     infinite: true,
+    autoplay: true,
     speed: 1000,
-    slidesToShow: 4,
+    slidesToShow: isXS? 1: 4,
     slidesToScroll: 1,
   };
 
@@ -46,7 +51,7 @@ const StorySlideShowCarousel = () => {
     <div>
       <div className="slider-container">
         <div className="flex justify-center mb-8">
-          <p className="text-3xl sm:text-1xl font-semibold text-cyan-500">
+          <p className="text-3xl font-semibold text-cyan-500">
             Here are some stories people have shared
           </p>
         </div>

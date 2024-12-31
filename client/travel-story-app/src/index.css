@@ -1,97 +1,330 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.rdp-root{
-  --rdp-accent-color: #01B0CB; /* change the accent color to indigo*/
+.rdp-root {
+  --rdp-accent-color: #01b0cb; /* change the accent color to indigo*/
   --rdp-accent-background-color: #dffbff; /* change the accent background color*/
   --rdp-day_button-border-raduis: 8px;
   --rdp-selected-font: bold medium var(--rdp-font-family);
 }
 
-@layer base{
-  html{
-    font-family: 'Poppins', sans-serif;
+@layer base {
+  html {
+    font-family: "Poppins", sans-serif;
   }
-  body{
-    background-color: #F0F8FF;
+  body {
+    background-color: #e7f1fa;
     overflow-x: hidden;
   }
 }
- /* custom scrollbar styles*/
- .scrollbar::-webkit-scrollbar{
+/* custom scrollbar styles*/
+.scrollbar::-webkit-scrollbar {
   width: 3px;
   height: 3px;
- }
+}
 
- .scrollbar::-webkit-scrollbar-thumb{
-  background-color: #057c8e;  /* change this to your desired color*/
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: #057c8e; /* change this to your desired color*/
   border-radius: 10px;
- }
+}
 
- .scrollbar::-webkit-scrollbar-track{
+.scrollbar::-webkit-scrollbar-track {
   background-color: rgb(172, 201, 229); /* change this to your desired color*/
- }
-
-
-
+}
 
 @layer components {
-  .input-box{
-
-    @apply w-full text-sm bg-cyan-600/5 rounded px-5 py-3 mb-4 outline-none; 
+  .input-box {
+    @apply w-full text-sm bg-cyan-600/5 rounded px-5 py-3 mb-4 outline-none;
   }
 
-  .btn-primary{
+  .btn-primary {
     @apply w-full text-sm font-medium text-white bg-cyan-500 shadow-lg shadow-cyan-200/50 p-[10px]
     rounded-full my-1 hover:bg-cyan-100 hover:text-primary 
     hover:transform hover:scale-105 transition-all duration-300 ease-in-out;
   }
 
-  .btn-light{
+  .btn-light {
     @apply bg-cyan-50 text-primary shadow-cyan-100/0 border border-cyan-100 hover:bg-primary
-     hover:text-white; 
+     hover:text-white;
   }
 
-  .login-ui-box{
+  .login-ui-box {
     @apply w-80 h-[450px] rounded-full bg-primary absolute rotate-45;
   }
-  
-  .model-box{
-    @apply w-[80vh] md:w-[40%] h-[80vh] bg-white rounded-lg mx-auto mt-14 p-5 overflow-y-scroll scrollbar z-50;
+
+  .model-box {
+    @apply w-[90vw] md:w-[40%] h-[80vh] bg-white rounded-lg mx-auto mt-14 p-5 overflow-y-scroll scrollbar z-50;
   }
 
-  .icon-btn{
+  .icon-btn {
     @apply text-[22px] text-slate-300 cursor-pointer hover:text-red-500;
   }
 
-  .input-label{
+  .input-label {
     @apply text-xs text-slate-700;
   }
 
-  .btn-small{
+  .btn-small {
     @apply flex items-center gap-1 text-xs font-medium bg-cyan-50 
     text-primary shadow-cyan-100/0 border border-cyan-100 
     hover:bg-primary hover:text-white rounded px-3 py-[3px]
      hover:transform hover:scale-105 transition-all duration-300 ease-in-out;
   }
 
-  .btn-delete{
+  .btn-delete {
     @apply bg-rose-50 text-rose-500 shadow-rose-100/0 border border-rose-100 hover:bg-rose-500 
-    hover:text-white
+    hover:text-white;
   }
 
-  .slider-container{
+  .slider-container {
     @apply w-full bg-gray-200/100 py-14 px-10 rounded-lg;
- 
-   .slick-slide > div {
-    margin: 0 10px;
-   }
+
+    .slick-slide > div {
+      margin: 0 10px;
+    }
   }
 
+  @layer components {
+    .navbar {
+      @apply bg-slate-200 border-none flex items-center justify-between px-[15px] py-2 ml-[-12px] drop-shadow sticky top-0 z-10 md:hidden hover:transition hover:duration-300 ease-in-out hover:text-cyan-300/50;
+    }
 
+    .navbar-link {
+      @apply text-cyan-500 cursor-pointer font-semibold hover:transition hover:duration-300 ease-in-out hover:text-cyan-300/50;
+    }
 
-};
+    .navbar-links-container {
+      @apply flex flex-col items-center gap-4  py-4 md:flex-row md:py-0;
+    }
+
+    /*navbar for dashboard*/
+    .navbar-links-container2 {
+      @apply flex flex-col items-center gap-4 py-4 sm:flex-row w-full md:py-0;
+    }
+
+    .navbar-mobile-menu {
+      @apply absolute top-16 left-0 w-[100px] bg-slate-100 md:static md:flex md:w-auto md:gap-6;
+    }
+
+    .navbar-hamburger {
+      @apply text-cyan-500 focus:outline-none md:hidden;
+    }
+
+    .navbar-hamburger-icon {
+      @apply w-6 h-6;
+    }
+  }
+
+  /* Main Page */
+  .signup-page {
+    @apply h-screen bg-cyan-50 overflow-hidden relative;
+  }
+
+  /* Decorative Boxes */
+  .decorative-box {
+    @apply absolute hidden sm:block;
+  }
+
+  .box-right {
+    @apply right-10 -top-40;
+  }
+
+  .box-center {
+    @apply bg-cyan-200 -bottom-40 right-1/2;
+  }
+
+  /* Container */
+  .signup-container {
+    @apply flex flex-col sm:flex-row items-center justify-center h-screen px-6 sm:px-20 mx-auto;
+  }
+
+  /* Left Section */
+  .signup-left-section {
+    @apply w-full sm:w-1/2 h-[40vh] sm:h-[90vh] bg-signup-bg-img bg-cover bg-center rounded-lg p-6 sm:p-10 flex items-end;
+  }
+
+  .signup-heading {
+    @apply text-3xl sm:text-5xl text-white font-semibold leading-tight;
+  }
+
+  .signup-description {
+    @apply text-sm sm:text-base text-white mt-4 mb-5 pr-0 sm:pr-7;
+  }
+
+  /* Right Section */
+  .signup-right-section {
+    @apply w-full sm:w-1/2 bg-white rounded-lg sm:rounded-r-lg p-6 sm:p-16 shadow-lg shadow-cyan-700/80;
+  }
+
+  .form-heading {
+    @apply text-lg sm:text-2xl font-semibold mb-6;
+  }
+
+  .input-box {
+    @apply w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-cyan-500;
+  }
+
+  .error-text {
+    @apply text-red-500 text-sm mt-2;
+  }
+
+  .divider-text {
+    @apply text-gray-500 text-center my-4;
+  }
+
+  .return-home {
+    @apply text-center mt-6;
+  }
+
+  .return-home-text {
+    @apply text-cyan-500 text-sm font-medium cursor-pointer;
+  }
+
+  .signup-bg-img {
+    background-image: url("./src/assets/images/signup-bg-img.jpg"); /* Replace with the actual path to your image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Login Page Layout */
+  .login-page {
+    @apply h-screen bg-cyan-50 overflow-hidden relative;
+  }
+
+  /* Decorative Boxes */
+  .decorative-box {
+    @apply absolute hidden sm:block;
+  }
+
+  .box-right {
+    @apply right-10 -top-40;
+  }
+
+  .box-center {
+    @apply bg-cyan-200 -bottom-40 right-1/2;
+  }
+
+  /* Login Container */
+  .login-container {
+    @apply container h-screen flex flex-col sm:flex-row items-center justify-center px-6 sm:px-20 mx-auto;
+  }
+
+  /* Left Section */
+  .login-left-section {
+    @apply w-full sm:w-1/2 h-[40vh] sm:h-[90vh] flex items-end bg-login-bg-img bg-cover bg-center rounded-lg p-6 sm:p-10;
+  }
+
+  .login-heading {
+    @apply text-3xl sm:text-5xl text-white font-semibold leading-[38px] sm:leading-[58px];
+  }
+
+  .login-description {
+    @apply text-base sm:text-[20px] text-white leading-6 mt-4 mb-5 pr-0 sm:pr-7;
+  }
+
+  /* Right Section */
+  .login-right-section {
+    @apply w-full sm:w-1/2 h-auto sm:h-[75vh] bg-white rounded-lg sm:rounded-r-lg p-8 sm:p-16 shadow-lg shadow-cyan-700/80;
+  }
+
+  .form-heading {
+    @apply text-xl sm:text-2xl font-semibold mb-5 sm:mb-7;
+  }
+
+  .input-box {
+    @apply w-full p-2 border border-slate-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-cyan-500;
+  }
+
+  .error-text {
+    @apply text-red-500 text-xs pb-1;
+  }
+
+  .divider-text {
+    @apply text-sm text-slate-500 text-center my-4;
+  }
+
+  .return-home {
+    @apply text-center mt-6 sm:mt-8;
+  }
+
+  .return-home-text {
+    @apply text-xs text-cyan-500 font-medium cursor-pointer;
+  }
+
+  .login-bg-img {
+    background-image: url("./src/assets/images/bg-image.png"); /* Replace with the actual path to your image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /*Dashboard css*/
+
+  .dashboard-container {
+    @apply container w-full mx-auto py-10 px-4;
+  }
+
+  .dashboard-content {
+    @apply flex flex-col gap-4;
+  }
+
+  @media (min-width: 768px) {
+    .dashboard-content {
+      @apply flex-row gap-7;
+    }
+  }
+
+  /* Grid for Stories */
+  .stories-grid-inner {
+    @apply grid grid-cols-1 gap-4;
+  }
+
+  @media (min-width: 768px) {
+    .stories-grid-inner {
+      @apply grid-cols-3;
+    }
+  }
+
+  /*SearchBar css*/
+
+  .search-bar {
+    @apply flex items-center px-4 py-2 bg-gray-200/50 rounded-md border border-gray-300;
+  }
+
+  .search-input {
+    @apply w-full text-base text-gray-700 bg-transparent outline-none;
+  }
+
+  .search-clear-icon,
+  .search-icon {
+    @apply text-lg cursor-pointer transition-all ease-in-out hover:text-gray-900;
+  }
+
+  /* Date Selector Button css */
+  .date-selector-button {
+    @apply inline-flex items-center gap-2 text-[13px] font-medium text-sky-600 
+    bg-sky-200/40 hover:bg-sky-200/70 rounded px-2 py-1 cursor-pointer;
+  }
+
+  .date-selector-icon {
+    @apply text-lg;
+  }
+
+  /* Date Picker Modal */
+  .date-picker-modal {
+    @apply overflow-y-scroll p-5 bg-sky-50/80 rounded-lg relative pt-9;
+  }
+
+  .date-picker-close-button {
+    @apply w-10 h-10 rounded-full flex items-center justify-center 
+    bg-sky-100 hover:bg-sky-300/30 absolute top-2 right-2;
+  }
+
+  .date-picker-close-icon {
+    @apply text-xl text-sky-600;
+  }
+}

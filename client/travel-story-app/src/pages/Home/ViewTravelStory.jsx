@@ -19,7 +19,7 @@ const ViewTravelStory = ({
     <div className="relative">
       <div className="flex items-center justify-end">
         <div>
-          <div className="flex items-center gap-3 bg-cyan-50/50 p-2 rounded-l-lg">
+          <div className="flex items-center gap-3 p-2 rounded-l-lg">
 
           {localStorage.getItem("accessToken") && pageLocation.pathname === '/dashboard' &&(
             <div className="flex gap-3">

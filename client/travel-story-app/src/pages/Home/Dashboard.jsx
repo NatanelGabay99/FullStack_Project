@@ -194,120 +194,93 @@ const Dashboard = () => {
 
   return (
     <>
-      <NavBar
-        userInfo={userInfo}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        onSearchNote={onSeachStory}
-        handleClearSearch={handleClearSearch}
-        displaySearch={true}
+    <NavBar          
+      userInfo={userInfo}
+      searchQuery={searchQuery}
+      setSearchQuery={setSearchQuery}
+      onSearchNote={onSeachStory}
+      handleClearSearch={handleClearSearch}
+      displaySearch={true}
+    />
+  
+    <div className="dashboard-container">
+      <FilterInfoTitle 
+        filterType={filterType}
+        filterDates={dateRange}
+        onClear={() => restFilter()}
       />
-
-      <div className="container mx-auto py-10">
-
-       <FilterInfoTitle 
-       filterType={filterType}
-       filterDates={dateRange}
-       onClear={()=> {restFilter();}}
-       />
-
-        <div className="flex gap-7">
-          <div className="flex-1">
-            {allStories.length > 0 ? (
-              <div className="grid grid-cols-3 gap-4">
-                {allStories.map((item) => (
-                  <TravelStoryCard
-                    key={item._id}
-                    imgUrl={item.imageUrl}
-                    title={item.title}
-                    story={item.story}
-                    date={item.visitedDate}
-                    visitedLocation={item.visitedLocation}
-                    isFavorite={item.isFavorite}
-                    onClick={() => handleViewStory(item)}
-                    onFavoriteClick={() => updateIsFavorite(item)}
-                  />
-                ))}
-              </div>
-            ) : (
-              <EmptyCard
-                imgSrc={getEmptyCardImg(filterType)}
-                message={getEmptyCardMessage(filterType)}
+  
+       <div className="flex flex-col-reverse gap-4 md:flex-row">
+      <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
+          {allStories.length > 0 ? (
+            allStories.map((item) => (
+              <TravelStoryCard
+                key={item._id}
+                imgUrl={item.imageUrl}
+                title={item.title}
+                story={item.story}
+                date={item.visitedDate}
+                visitedLocation={item.visitedLocation}
+                isFavorite={item.isFavorite}
+                onClick={() => handleViewStory(item)}
+                onFavoriteClick={() => updateIsFavorite(item)}
               />
-            )}
-          </div>
-
-          <div className="w-[350px]">
-
-          <div
-            className="bg-white border border-slat-200 shadow-lg shadow-slate-200/60
-          rounded-lg hover:shadow-lg hover:shadow-slate-300 transition-all ease-in-out 
-          relative cursor-pointer">
-            <div className="p-3">
-              <DayPicker
-                captionLayout="dropdown-buttons"
-                mode="range"
-                selected={dateRange}
-                onSelect={handleDayClick}
-                pagedNavigation
-              />
-            </div>
-          </div>
+            ))
+          ) : (
+            <EmptyCard
+              imgSrc={getEmptyCardImg(filterType)}
+              message={getEmptyCardMessage(filterType)}
+            />
+          )}
+        </div>
+  
+        <div className="w-full md:w-1/4">
+          <div className="bg-white shadow-md rounded-lg p-4">
+            <DayPicker
+              captionLayout="dropdown-buttons"
+              mode="range"
+              selected={dateRange}
+              onSelect={handleDayClick}
+              pagedNavigation
+            />
           </div>
         </div>
       </div>
-
-      {/* Add and Edit travel story Modal */}
-      <Modal
-        isOpen={openAddEditModal.isShown}
-        onRequestClose={() => {}}
-        style={{
-          overlay: {
-            backgroundColor: "rgba(0,0,0,0.2)",
-            zIndex: 999,
-          },
+    </div>
+  
+    <Modal
+      isOpen={openAddEditModal.isShown}
+      onRequestClose={() => {}}
+      style={{ overlay: { backgroundColor: "rgba(0,0,0,0.2)", zIndex: 999 } }}
+      appElement={document.getElementById("root")}
+      className="model-box"
+    >
+      <AddEditTravelStory
+        type={openAddEditModal.type}
+        storyInfo={openAddEditModal.data}
+        onClose={() => setOpenAddEditModal({ isShown: false, type: "add", data: null })}
+        getAllTravelStories={getAllTravelStories}
+      />
+    </Modal>
+  
+    <Modal
+      isOpen={openViewModal.isShown}
+      onRequestClose={() => {}}
+      style={{ overlay: { backgroundColor: "rgba(0,0,0,0.2)", zIndex: 999 } }}
+      appElement={document.getElementById("root")}
+      className="model-box"
+    >
+      <ViewTravelStory
+        storyInfo={openViewModal.data || null}
+        onClose={() => setOpenViewModal((prevState) => ({ ...prevState, isShown: false }))}
+        onEditClick={() => {
+          setOpenViewModal((prevState) => ({ ...prevState, isShown: false }));
+          handleEdit(openViewModal.data || null);
         }}
-        appElement={document.getElementById("root")}
-        className="model-box"
-      >
-        <AddEditTravelStory
-          type={openAddEditModal.type}
-          storyInfo={openAddEditModal.data}
-          onClose={() => {
-            setOpenAddEditModal({ isShown: false, type: "add", data: null });
-          }}
-          getAllTravelStories={getAllTravelStories}
-        />
-      </Modal>
-
-      {/* View travel story Modal */}
-      <Modal
-        isOpen={openViewModal.isShown}
-        onRequestClose={() => {}}
-        style={{
-          overlay: {
-            backgroundColor: "rgba(0,0,0,0.2)",
-            zIndex: 999,
-          },
-        }}
-        appElement={document.getElementById("root")}
-        className="model-box"
-      >
-        <ViewTravelStory
-          storyInfo={openViewModal.data || null}
-          onClose={() => {
-            setOpenViewModal((prevState) => ({ ...prevState, isShown: false }));
-          }}
-          onEditClick={() => {
-            setOpenViewModal((prevState) => ({ ...prevState, isShown: false }));
-            handleEdit(openViewModal.data || null);
-          }}
-          onDeleteClick={() => {
-            deleteTravelStory(openViewModal.data || null);
-          }}
-        />
-      </Modal>
-
+        onDeleteClick={() => deleteTravelStory(openViewModal.data || null)}
+      />
+    </Modal>
+  
       <button
         className="w-16 h-16 flex items-center justify-center 
       rounded-full bg-primary hover:bg-cyan-400 fixed right-10 bottom-10"

@@ -4,16 +4,20 @@ const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user.model");
 const authenticateToken = require("../../utilities");
-
+const { validateLogin, validateRegistration } = require("../../validation/usersValidationService");
+const registerValidation = require("../../validation/joi/registerValidation");
 
 //create account
 router.post("/create-account", async (req, res) => {
   try {
-    const { fullName, email, password } = req.body;
-    if (!fullName || !email || !password) {
-      return res.status(400).json({ error: true, message: "All fields are required" });
+     const error  = validateRegistration(req.body); 
+   /*  const { error } = registerValidation(req.body); */
+    if (error !== "") {
+      return res.status(400).json({ error: true, message: error });
     }
     
+    const {fullName, email, password} = req.body;
+
     const isUser = await User.findOne({ email });
     if (isUser) {
       return res.status(400).json({ error: true, message: "It seems you already have an acoount. Please Login" });
@@ -51,14 +55,16 @@ router.post("/create-account", async (req, res) => {
 // Login
 router.post("/login", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const error  = validateLogin(req.body);
 
     // Validate request body beacause email and password are required
-    if (!email || !password) {
+
+    if (error !== "") { 
       return res
         .status(400)
-        .json({ error: true, message: "Email and Password are required" });
+        .json({ error: true, message: error });
     }
+    const { email, password } = req.body;
 
     // Find user by email because email is unique
     const user = await User.findOne({ email });
@@ -68,6 +74,7 @@ router.post("/login", async (req, res) => {
 
     // Validate password
     const isPasswordValid = await bcryptjs.compare(password, user.password);
+
     if (!isPasswordValid) {
       return res
         .status(400)
@@ -80,6 +87,7 @@ router.post("/login", async (req, res) => {
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "72h" }
     );
+
 
     // Return successful response
     return res.status(200).json({
