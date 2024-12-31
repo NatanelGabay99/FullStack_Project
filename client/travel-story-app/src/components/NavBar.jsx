@@ -39,17 +39,14 @@ const NavBar = ({
   return (
     <div className=" w-full bg-slate-200 flex items-center justify-center gap-4 sm:justify-between px-6 py-5 drop-shadow sticky top-0 z-10 ">
       <div className="flex items-center gap-6">
-        {location.pathname === "/dashboard" ?  (
+        {location.pathname === "/dashboard" || location.pathname === "/favorites" ?  (
           <img src={LOGO} alt="travel-story" className="h-9 hidden sm:block" />
         ): (<img src={LOGO} alt="travel-story" className="h-9" />)
         }
         
         <div className="flex gap-4">
           <div className="navbar">
-            {/* Logo */}
-            {/* <div className="flex items-center gap-6">
-    <img src={LOGO} alt="travel-story" className="navbar-logo" />
-  </div> */}
+            
 
             {/* Hamburger Menu for Mobile */}
             <div className="navbar-hamburger md:hidden">
@@ -82,6 +79,7 @@ const NavBar = ({
               } md:hidden`}
             >
               <div className="navbar-links-container">
+                 {/* When there is no User*/}
                 {!isToken && (
                   <>
                     <p
@@ -99,6 +97,8 @@ const NavBar = ({
                   </>
                 )}
 
+
+                {/* When User is Logged in*/}
                 {isToken && (
                   <>
                     <p
@@ -113,6 +113,12 @@ const NavBar = ({
                     >
                       About
                     </p>
+                    <p
+                      className="navbar-link"
+                      onClick={() => navigate("/favorites")}
+                    >
+                      Favorites
+                    </p>
                     <p className="navbar-link" onClick={onLogout}>
                       Logout
                     </p>
@@ -122,6 +128,9 @@ const NavBar = ({
             </div>
           </div>
 
+
+
+           {/* When there is no User*/}
           {!isToken && (
             <>
               <div className="hidden md:flex navbar-links-container">
@@ -143,6 +152,9 @@ const NavBar = ({
             </>
           )}
 
+
+
+          {/* When User is Logged in*/}
           {isToken && (
             <>
               <div className="hidden md:flex navbar-links-container2">
@@ -160,11 +172,19 @@ const NavBar = ({
                 >
                   About
                 </p>
+                <p
+                  className="text-cyan-500 cursor-pointer font-semibold hover:transition hover:duration-300 ease-in-out hover:text-cyan-300/50"
+                  style={{ fontFamily: "'Pacifico', cursive" }}
+                  onClick={() => navigate("/favorites")}
+                >
+                  Favorite Stories
+                </p>
               </div>
             </>
           )}
         </div>
       </div>
+
       {isToken && (
         <SearchBar
           value={searchQuery}

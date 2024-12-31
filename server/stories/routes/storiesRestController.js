@@ -74,19 +74,20 @@ router.get("/get-my-stories", authenticateToken,  async (req, res) => {
 });
 
 
-/* router.get("/get-favorite-stories", authenticateToken,  async (req, res) => {
- const {userId} = req.user;
+// Get favorite travel stories
+router.get("/get-favorite-stories", authenticateToken,  async (req, res) => {
+  const {userId} = req.user;
+  
+  try{
+    const favoriteStories = await TravelStory.find({userId, isFavorite: true});
+    res.status(200).json({stories: favoriteStories});
 
-  try {
-    // Find all travel stories for the authenticated user
-    const travelStories = await TravelStory.find({userId}).sort({isFavorite: -1});
-    // Respond with the travel stories
-    res.status(200).json({ stories: travelStories });
+
   } catch (error) {
-    console.error("Error in /travel-stories:", error);
+    console.error("Error in /favorite-stories:", error);
     res.status(500).json({ error: true, message: error.message });
   }
-}); */
+}); 
 
 
 //Route to handle image upload

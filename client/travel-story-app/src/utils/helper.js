@@ -1,6 +1,6 @@
-import ADD_STORY_IMG from '../assets/images/add-story.svg'
-import NO_SEARCH_DATA_IMG from '../assets/images/no-search-data.svg'
-import NO_FILTER_DATA_IMG from '../assets/images/no-filter-data.svg'
+import ADD_STORY_IMG from "../assets/images/add-story.svg";
+import NO_SEARCH_DATA_IMG from "../assets/images/no-search-data.svg";
+import NO_FILTER_DATA_IMG from "../assets/images/no-filter-data.svg";
 
 export const validateEmail = (email) => {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -24,6 +24,8 @@ export const getEmptyCardMessage = (filterType) => {
   switch (filterType) {
     case "search":
       return `Oops! No stories found matching your search.`;
+    case "no-favorites":
+      return `No favorite stories found. Click the heart icon on a story to mark it as a favorite.`;
 
     case "date":
       return `No stories found in the given date range`;
