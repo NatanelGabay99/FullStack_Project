@@ -8,7 +8,7 @@ const Footer = () => {
   const isToken = localStorage.getItem("accessToken");
 
   return (
-    <div className="bg-slate-200 flex flex-col items-center px-6 py-6 bottom-0 z-10">
+    <div className="bg-slate-200 flex flex-col items-center px-6 py-6">
   {/* Navigation Section */}
   <div className="flex justify-center">
     <div className="flex flex-col items-center mx-[3em]">

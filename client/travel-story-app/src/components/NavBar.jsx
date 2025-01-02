@@ -177,7 +177,7 @@ const NavBar = ({
                   style={{ fontFamily: "'Pacifico', cursive" }}
                   onClick={() => navigate("/favorites")}
                 >
-                  Favorite Stories
+                  Favorite Stories ❤️
                 </p>
               </div>
             </>
