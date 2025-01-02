@@ -10,30 +10,50 @@ Currently, two official plugins are available:
 ## Project name:
 Travel Story
 
-## Library & Framework:
-Library: React,
-Framework: React.js
 
-## Available Scripts:
-In the project directory, you can run in client-side:
-### `npm run dev`
-and in server-side you can run for Mongo in Atlas connection:
-### `npm start`
-in local MongoDB connection run:
-## `npm run dev`
+## Installation:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/NatanelGabay99/FullStack_Project.git.
 
-** In order to use the app as local database user, register with this information:
- fullName: Yisrael Yisraeli,
- email: YisraelYis@gmail.com,
- password: yis1234
+2. Navigate to the server directory:
+## cd server ##
 
-It runs the app in the development mode.\
-Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
+3. Install dependencies:
+## npm install ##
+
+4a. Run server command: (this will connect to local mongo databse)
+## npm run dev ## 
+
+4b. Run server command: (this will connect to Atlas mongo databse)
+## npm start ##
+
+5. From the Root directory navigate to the client directory:
+## cd client, and then - cd travel-story-app ##
+
+6. Install dependencies:
+## npm install ##
+
+7. Run client command:
+## npm run dev ## 
+
+
+
+## Initial User Accounts for Testing (Local Development Only) ##
+
+Warning: The following initial user accounts are intended for local development purposes only.
+
+| Email | Password |
+|----------------|----------------|
+|YisraelYis@gmail.com|yis1234|
+ 
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-## Technologies used in App:
-### Frontend-client (url link: http://localhost:5173)
+
+## Technologies used in App: ##
+
+### Frontend-client (url link: http://localhost:5173) to view it in your browser.
 - Environment: React, Tailwind-CSS, React Router
   - React: `npm install react react-dom`
     - A JavaScript library for building user interfaces.
@@ -112,6 +132,8 @@ To learn React, check out the [React documentation](https://reactjs.org/).
   - Cors: `npm install cors`
     - A middleware to enable CORS with various options.
 
+
+
 ## Main Files:
 - React-JavaScript (JSX)
 - Vanilla JavaScript (JS)
@@ -121,24 +143,10 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Features:
 - User Authentication: Signup, Login, and Logout functionality.
-- Travel Stories: Create, edit, delete, and view travel stories.
+- Travel Stories: Create, Edit, Delete, and View travel stories.
 - Favorites: Mark stories as favorites.
 - Search: Search for travel stories.
 - Responsive Design: Mobile-friendly design.
-
-## Installation:
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/NatanelGabay99/FullStack_Project.git.
-
-2. Navigate to the project directory: 
-## cd travel-story-app ##
-
-3. Install dependencies:
-## npm install ##
-
-4. Start the development server:
-## npm run dev ##
 
 
 ## Contributing: ##
@@ -147,5 +155,5 @@ Contributions are welcome! Please open an issue or submit a pull request.
 ## License: ##
 This project is licensed under the MIT License.
 
-This README file includes sections for project name, libraries and frameworks used, available scripts, technologies used, main files, usage of the app, features, installation, deployment, contributing, and license. Adjust the content as needed to fit your specific project details.
+
 
