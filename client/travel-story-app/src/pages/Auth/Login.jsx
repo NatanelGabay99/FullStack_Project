@@ -20,20 +20,17 @@ const Login = () => {
 
     setError("");
 
-    // Login API call
     try {
       const response = await axiosInstance.post("/login", {
         email: email,
         password: password,
       });
 
-      // handle successful login response
       if (response.data && response.data.accessToken) {
         localStorage.setItem("accessToken", response.data.accessToken);
         navigate("/dashboard");
       }
     } catch (error) {
-      // handle login error
       if (
         error.response &&
         error.response.data &&
@@ -54,7 +51,7 @@ const Login = () => {
       <div className="decorative-box box-center"></div>
 
       <div className="login-container">
-        {/* Left Section */}
+       
         <div className="login-left-section z-10">
           <div>
             <h4 className="login-heading">
@@ -67,7 +64,7 @@ const Login = () => {
           </div>
         </div>
 
-        {/* Right Section */}
+        
         <div className="login-right-section z-10">
           <form onSubmit={handleLogin}>
             <h4 className="form-heading">Login</h4>

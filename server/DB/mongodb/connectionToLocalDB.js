@@ -3,7 +3,6 @@ const { createInitialUsers, createInitialStories } = require("../../initialDataS
 const userModel = require("../../users/models/user.model");
 const travelStoryModel = require("../../stories/models/travelStory.model");
 
-// a function to connect to the local mongodb
 const connectToLocalDb = async () => {
     try {
       await mongoose.connect("mongodb://127.0.0.1:27017/myDatabase");

@@ -9,7 +9,7 @@ const Footer = () => {
 
   return (
     <div className="bg-slate-200 flex flex-col items-center px-6 py-6">
-  {/* Navigation Section */}
+ 
   <div className="flex justify-center">
     <div className="flex flex-col items-center mx-[3em]">
       {isToken ? (
@@ -42,7 +42,7 @@ const Footer = () => {
     </div>
   </div>
 
-  {/* Copyright Section */}
+  
   <div className="mt-4 text-center text-sm text-gray-600 font-medium">
     © {new Date().getFullYear()} Natanel Gabay. All rights reserved.
   </div>

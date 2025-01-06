@@ -23,7 +23,6 @@ const SignUp = () => {
 
     setError("");
 
-    //Signup API call
     try {
       const response = await axiosInstance.post("/create-account", {
         fullName: name,
@@ -31,13 +30,11 @@ const SignUp = () => {
         password: password,
       });
 
-      // handle successful login response
       if (response.data && response.data.accessToken) {
         localStorage.setItem("accessToken", response.data.accessToken);
         navigate("/dashboard");
       }
     } catch (error) {
-      // handle login error
       if (
         error.response &&
         error.response.data &&
@@ -58,7 +55,7 @@ const SignUp = () => {
       <div className="decorative-box box-center"></div>
 
       <div className="signup-container">
-        {/* Left Section */}
+      
         <div className="signup-left-section z-10">
           <div>
             <h4 className="signup-heading">
@@ -71,7 +68,7 @@ const SignUp = () => {
           </div>
         </div>
 
-        {/* Right Section */}
+       
         <div className="signup-right-section z-10">
           <form onSubmit={handleSignUp}>
             <h4 className="form-heading">Signup</h4>

@@ -7,11 +7,9 @@ const authenticateToken = require("../../utilities");
 const { validateLogin, validateRegistration } = require("../../validation/usersValidationService");
 const registerValidation = require("../../validation/joi/registerValidation");
 
-//create account
 router.post("/create-account", async (req, res) => {
   try {
      const error  = validateRegistration(req.body); 
-   /*  const { error } = registerValidation(req.body); */
     if (error !== "") {
       return res.status(400).json({ error: true, message: error });
     }
@@ -52,12 +50,10 @@ router.post("/create-account", async (req, res) => {
 });
 
 
-// Login
 router.post("/login", async (req, res) => {
   try {
     const error  = validateLogin(req.body);
 
-    // Validate request body beacause email and password are required
 
     if (error !== "") { 
       return res
@@ -66,13 +62,11 @@ router.post("/login", async (req, res) => {
     }
     const { email, password } = req.body;
 
-    // Find user by email because email is unique
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({ error: true, message: "User not found" });
     }
 
-    // Validate password
     const isPasswordValid = await bcryptjs.compare(password, user.password);
 
     if (!isPasswordValid) {
@@ -81,7 +75,6 @@ router.post("/login", async (req, res) => {
         .json({ error: true, message: "Invalid Credentials" });
     }
 
-    // Generate JWT token
     const accessToken = jwt.sign(
       { userId: user._id },
       process.env.ACCESS_TOKEN_SECRET,
@@ -89,7 +82,6 @@ router.post("/login", async (req, res) => {
     );
 
 
-    // Return successful response
     return res.status(200).json({
       error: false,
       user: { fullName: user.fullName, email: user.email },
@@ -99,7 +91,6 @@ router.post("/login", async (req, res) => {
   } catch (error) {
     console.error("Error in /login:", error.message);
 
-    // Catch unexpected errors
     return res.status(500).json({
       error: true,
       message: "Server error. Please try again later.",
@@ -108,7 +99,6 @@ router.post("/login", async (req, res) => {
 });
 
 
-// Get user
 router.get("/get-user", authenticateToken, async (req, res) => {
   try {
     const userId = req.user.userId;

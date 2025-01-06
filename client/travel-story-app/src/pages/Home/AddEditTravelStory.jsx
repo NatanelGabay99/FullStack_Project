@@ -27,15 +27,12 @@ const AddEditTravelStory = ({
 
   const [error, setError] = useState("");
 
-  // Add New Travel Story
   const addNewTravelStory = async () => {
     try {
       let imageUrl = "";
 
-      // Upload image if present
       if (storyImg) {
         const imgUploadRes = await uploadImage(storyImg);
-        // Get image URL
         imageUrl = imgUploadRes.imageUrl || "";
       }
 
@@ -51,9 +48,7 @@ const AddEditTravelStory = ({
 
       if (response.data && response.data.travelStory) {
         toast.success("Story Added Successfully");
-        // Refresh stories
         getAllTravelStories();
-        // Close modal or form
         onClose();
       }
     } catch (error) {
@@ -64,13 +59,11 @@ const AddEditTravelStory = ({
       ) {
         setError(error.response.data.message);
       } else {
-        // Handle unexpected errors
         setError("An unexpected error occurred. Please try again.");
       }
     }
   };
 
-  // Update Travel story
   const updateTravelStory = async () => {
     const storyId = storyInfo._id;
 
@@ -88,7 +81,6 @@ const AddEditTravelStory = ({
       };
 
       if (typeof storyImg === "object") {
-        // Upload New Image
         const imgUploadRes = await uploadImage(storyImg);
         imageUrl = imgUploadRes?.imageUrl || "";
 
@@ -105,9 +97,7 @@ const AddEditTravelStory = ({
 
       if (response.data && response.data.travelStory) {
         toast.success("Story Updated Successfully");
-        // Refresh stories
         getAllTravelStories();
-        // Close modal or form
         onClose();
       }
     } catch (error) {
@@ -120,7 +110,6 @@ const AddEditTravelStory = ({
       ) {
         setError(error.response.data.message);
       } else {
-        // Handle unexpected errors
         setError("An unexpected error occurred. Please try again.");
       }
     }
@@ -154,9 +143,7 @@ const AddEditTravelStory = ({
     }
   };
 
-  // Delete story image and Update the story
   const handleDeleteStoryImg = async () => {
-    // Deleting the Image
     const deleteImgRes = await axiosInstance.delete("/delete-image", {
       params: {
         imageUrl: storyInfo.imageUrl,
@@ -174,7 +161,6 @@ const AddEditTravelStory = ({
         imageUrl: "",
       };
 
-      // Updating story
       const response = await axiosInstance.put(
         "/edit-story/" + storyId,
         postData

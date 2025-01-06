@@ -48,20 +48,17 @@ const Dashboard = () => {
 
       const response = await axiosInstance.get("/get-user");
       if (response.data && response.data.user) {
-        // set user info if data exists
         setUserInfo(response.data.user);
       }
     } catch (error) {
       console.log(error);
       if (error.response && error.response.status === 401) {
-        // clear local storage if unauthorized
         localStorage.clear();
         navigate("/home");
       }
     }
   };
 
-  // get all stories
   const getAllTravelStories = async () => {
     try {
       const response = await axiosInstance.get("/get-my-stories");
@@ -73,17 +70,14 @@ const Dashboard = () => {
     }
   };
 
-  // handle Edit story
   const handleEdit = (data) => {
     setOpenAddEditModal({ isShown: true, type: "edit", data: data });
   };
 
-  // handle travel story click
   const handleViewStory = (data) => {
     setOpenViewModal({ isShown: true, data });
   };
 
-  // handle update favorite
   const updateIsFavorite = async (storyData) => {
     const storyId = storyData._id;
     try {
@@ -101,7 +95,7 @@ const Dashboard = () => {
         } else if(filterType === "date"){
           filterStoriesByDate(dateRange);
         } else{
-        getAllTravelStories(); // Refresh the travel stories
+        getAllTravelStories(); 
         }
       }
     } catch (error) {
@@ -109,7 +103,6 @@ const Dashboard = () => {
     }
   };
 
-  // delete story
   const deleteTravelStory = async (data) => {
     const storyId = data._id;
 
@@ -122,12 +115,10 @@ const Dashboard = () => {
         getAllTravelStories();
       }
     } catch (error) {
-      // handle unexpected errors
       console.log("An unexpected error occurred. Please try again", error);
     }
   };
 
-  // search story
   const onSeachStory = async (query) => {
     try {
       const response = await axiosInstance.get("/search", {
@@ -139,18 +130,15 @@ const Dashboard = () => {
         setAllStories(response.data.stories);
       }
     } catch (error) {
-      // handle unexpected errors
       console.log("An unexpected error occurred. Please try again", error);
     }
   };
 
-  // handle clear search
   const handleClearSearch = () => {
     setFilterType("");
     getAllTravelStories();
   };
 
-  // handle filter stories by date select
   const filterStoriesByDate = async(day) => {
     try{
       const startDate = day.from ? moment(day.from).valueOf() : null;
@@ -172,7 +160,6 @@ const Dashboard = () => {
   };
 
 
-  // handle date range select
   const handleDayClick = (day) => {
     setDateRange(day);
     filterStoriesByDate(day);
@@ -192,6 +179,7 @@ const Dashboard = () => {
     return () => {};
   }, []);
 
+  
   return (
     <>
     <NavBar          

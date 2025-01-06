@@ -48,7 +48,7 @@ const NavBar = ({
           <div className="navbar">
             
 
-            {/* Hamburger Menu for Mobile */}
+           
             <div className="navbar-hamburger md:hidden">
               <button onClick={() => setMenuOpen(!menuOpen)}>
                 <svg
@@ -72,14 +72,14 @@ const NavBar = ({
               </button>
             </div>
 
-            {/* Navigation Links */}
+           
             <div
               className={`navbar-mobile-menu ${
                 menuOpen ? "block" : "hidden"
               } md:hidden`}
             >
               <div className="navbar-links-container">
-                 {/* When there is no User*/}
+             
                 {!isToken && (
                   <>
                     <p
@@ -98,7 +98,7 @@ const NavBar = ({
                 )}
 
 
-                {/* When User is Logged in*/}
+             
                 {isToken && (
                   <>
                     <p
@@ -130,7 +130,7 @@ const NavBar = ({
 
 
 
-           {/* When there is no User*/}
+         
           {!isToken && (
             <>
               <div className="hidden md:flex navbar-links-container">
@@ -154,7 +154,7 @@ const NavBar = ({
 
 
 
-          {/* When User is Logged in*/}
+       
           {isToken && (
             <>
               <div className="hidden md:flex navbar-links-container2">

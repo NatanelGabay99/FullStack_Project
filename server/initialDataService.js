@@ -28,7 +28,6 @@ const createStory = async (title, story, visitedLocation, imageUrl, visitedDate,
           visitedDate,
           userId,
         });
-        // Save to database
         await travelStory.save();
 };
 

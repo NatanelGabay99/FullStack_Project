@@ -15,7 +15,6 @@ const AboutPage = () => {
       if (accessToken) {
         const response = await axiosInstance.get("/get-user");
         if (response.data && response.data.user) {
-          // set user info if data exists
           setUserInfo(response.data.user);
         }
       }

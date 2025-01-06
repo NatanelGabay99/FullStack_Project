@@ -24,14 +24,11 @@ const ImageSelector = ({ image, setImage, handleDeleteImg }) => {
   };
 
   useEffect(() => {
-    // if the image prop is a string (URL), set it as the previewUrl
     if (typeof image === 'string') {
       setPreviewUrl(image);
     } else if (image) {
-      // if the image prop is a file object, create a preview URL 
       setPreviewUrl(URL.createObjectURL(image));
     } else {
-      // if there is no image, clear the preview URL
       setPreviewUrl(null);
     }
   
