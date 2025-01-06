@@ -67,7 +67,7 @@ const AboutPage = () => {
               1. Creating a New Story
             </h3>
             <p className="text-gray-600 leading-relaxed">
-              Click the '+' button at the bottom-right corner of the home page
+              Click the &apos;+&apos; button at the bottom-right corner of the home page
               to create/add a new story. Fill in details like the title,
               location, date, and a description. Upload a photo to capture the
               memory.
@@ -83,7 +83,7 @@ const AboutPage = () => {
             <p className="text-gray-600 leading-relaxed">
               All your stories are displayed on the home page in a clean card
               layout. Use the search bar at the top to find a story quickly by
-              it's title or location.
+              it&apos;s title or location.
             </p>
           </div>
         </section>

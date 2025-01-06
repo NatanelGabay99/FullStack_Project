@@ -161,7 +161,7 @@ const AddEditTravelStory = ({
         imageUrl: "",
       };
 
-      const response = await axiosInstance.put(
+       await axiosInstance.put(
         "/edit-story/" + storyId,
         postData
       );
