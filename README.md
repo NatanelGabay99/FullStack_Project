@@ -152,6 +152,8 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 - Search: Search for travel stories.
 - Responsive Design: Mobile-friendly design.
 
+## Project Documentation: ##
+View project documentation via postman: [https://documenter.getpostman.com/view/34977862/2sAYJ9BeTp]
 
 ## Contributing: ##
 Contributions are welcome! Please open an issue or submit a pull request.
@@ -160,7 +162,5 @@ Contributions are welcome! Please open an issue or submit a pull request.
 This project is licensed under the MIT License.
 
 
-## Project Documentation: ##
-View project documentation via postman: [https://documenter.getpostman.com/view/34977862/2sAYJ9BeTp]
 
 
