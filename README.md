@@ -26,6 +26,15 @@ Project name:
 3. Install dependencies:
 ## npm install ##
 
+note: Create a .env file in the root directory.
+
+    Ensure you set the following variables:
+
+    ```sh
+    ACCESS_TOKEN_SECRET=your_jwt_secret
+    connectionString=your_atlas_mongodb_connection_string
+    PORT=your_server_port (optional)
+
 4a. Run server command: (this will connect to local mongo databse)
 ## npm run dev ## 
 
@@ -160,6 +169,8 @@ Contributions are welcome! Please open an issue or submit a pull request.
 
 ## License: ##
 This project is licensed under the MIT License.
+
+
 
 
 
