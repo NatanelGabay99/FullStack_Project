@@ -176,7 +176,7 @@
     @apply text-cyan-500 text-sm font-medium cursor-pointer;
   }
 
-  .signup-bg-img {
+  .signup-left-section {
     background-image: url("../public/images/signup-bg-img.jpg"); 
     background-size: cover;
     background-position: center;
@@ -243,7 +243,7 @@
     @apply text-xs text-cyan-500 font-medium cursor-pointer;
   }
 
-  .login-bg-img {
+  .login-left-section {
     background-image: url("../public/images/bg-image.png"); 
     background-size: cover;
     background-position: center;
