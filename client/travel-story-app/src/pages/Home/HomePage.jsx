@@ -35,14 +35,14 @@ const HomePage = () => {
               from Around the World.
             </p>
             <p className="text-xl sm:text-lg text-gray-600 mt-3">
-              To learn more about the app, click on the {""}{" "}
+              To learn more about the app, click {""}{" "}
               <span
                 className="text-cyan-500 font-semibold cursor-pointer"
                 onClick={() => navigate("/about")}
               >
-                About
+                here
               </span>{" "}
-              {""} section
+              {""}
             </p>
           </div>
         </div>
