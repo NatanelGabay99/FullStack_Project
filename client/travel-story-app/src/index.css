@@ -177,7 +177,7 @@
   }
 
   .signup-bg-img {
-    background-image: url("./src/assets/images/signup-bg-img.jpg"); 
+    background-image: url("../public/images/signup-bg-img.jpg"); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -244,7 +244,7 @@
   }
 
   .login-bg-img {
-    background-image: url("./src/assets/images/bg-image.png"); 
+    background-image: url("../public/images/bg-image.png"); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
